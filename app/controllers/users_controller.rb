@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
 
 get '/login' do
-	if logged_in?
+	if !logged_in?
 		erb :'users/login'
 	else
 		redirect '/locations'
@@ -21,7 +21,7 @@ post '/login' do
 end
 
 get '/signup' do
-	if logged_in?
+	if !logged_in?
  		erb :'users/signup'
  	else
 		redirect '/locations'
@@ -30,18 +30,18 @@ end
 
 
 post '/signup' do
-	
-
-
-end
-
-get '/logout' do
-	if session[:user_id] != nil
-		session.destroy
-		redirect to '/login'
+	if params[:username] == "" || params[:password] == ""
+		redirect '/signup'
 	else
-		redirect to '/'
+		@user = User.create(:username => params[:username], :password => params[:password])
+      session[:user_id] = @user.id
+      redirect '/locations'
 	end
 end
+
+post '/logout' do
+    session.clear
+    redirect '/'
+  end
 
 end
