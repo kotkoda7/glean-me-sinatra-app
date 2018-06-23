@@ -6,9 +6,16 @@ class LocationsController < ApplicationController
 		erb :'locations/index'
 	end
 
+	get '/locations/new' do
+		authenticate_user
+		@locations = Location.all
+		erb :'/locations/new'
+	end
+
+
 	get '/locations/:id' do
 		authenticate_user
-		@location = Location.find_by_id(params(:id))
+		@location = Location.find_by_id(params[:id])
 		if @location
 			erb :'/locations/show'
 		else

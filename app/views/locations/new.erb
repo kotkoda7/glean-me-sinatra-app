@@ -1,0 +1,38 @@
+<h2>Fill out this form to add a new location:</h2>
+
+<form action="/locations" method="POST">
+
+  <label>Choose a location type:</label>
+  <select name="loc_type">
+      <option value="">
+        -
+      </option>
+      <% @locations.each do |location| %>
+        <option value="<%=location.loc_type%>"><%=location.loc_type%>
+        </option>
+      <% end %>
+  </select>
+<br>
+
+<label> Location address</label>
+  <input type="text" name="address" size="40" > </br>
+
+  <label> Latitude</label>
+  <input id="location_lat" name="lat" size="10" type="text" value="">
+
+  <label> Longitude</label>
+  <input id="location_lng" name="lng" size="10" type="text" value=""><br>
+
+  <h3>
+      <label>Choose a food category for this location:</label>
+  </h3>
+
+ 
+  <input type="submit" value="Add location">
+</form>
+
+
+  
+<h3>OR ADD NEW FOOD TYPE!</h3>
+
+
