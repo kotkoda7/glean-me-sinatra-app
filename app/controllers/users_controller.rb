@@ -1,7 +1,6 @@
 class UsersController < ApplicationController 
 
 
-
 get '/login' do
 	if !logged_in?
 		erb :'users/login'
@@ -39,9 +38,12 @@ post '/signup' do
 	end
 end
 
-post '/logout' do
-    session.clear
-    redirect '/'
-  end
-
+get '/logout' do
+    if session[:user_id] != nil
+    	session.clear
+    	redirect to '/login'
+    else
+    	redirect '/'
+  	end
+end
 end

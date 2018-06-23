@@ -1,0 +1,18 @@
+<h3>Here's the list locations collected:</h3>
+
+Click on location id for details:
+<ul>
+	<% @locations.each do |location| %>
+		<a href="/locations/<%= location.id%>/edit"><%=location.id> </a>
+
+<%= location.loc_type%> property, 
+     <%= location.address%>
+     <%= location.lat%>
+     <%= location.lng%>
+     <%= location.description%>
+    </h3>
+    <% end %>
+</ul>
+
+
+<br>
