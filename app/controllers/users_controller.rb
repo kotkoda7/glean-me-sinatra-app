@@ -33,8 +33,8 @@ post '/signup' do
 		redirect '/signup'
 	else
 		@user = User.create(:username => params[:username], :password => params[:password])
-      session[:user_id] = @user.id
-      redirect '/locations'
+      	session[:user_id] = @user.id
+      	redirect '/locations'
 	end
 end
 
@@ -46,4 +46,9 @@ get '/logout' do
     	redirect '/'
   	end
 end
+
+post '/logout' do
+    session.clear
+    redirect '/'
+  end
 end

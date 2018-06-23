@@ -1,10 +1,9 @@
-<h3>Here's the list locations collected:</h3>
 
 Click on location id for details:
 <ul>
-    <% @locations.each do |location| %>
+    <% @location.each do |location| %>
     <h3>
-        <a href="/locations/<%= location.id%>"><%= location.id%>  </a>
+        <a href="/locations/<%= location.id%>/edit"><%= location.id%>  </a>
          
      <%= location.loc_type%> property, 
      <%= location.address%>

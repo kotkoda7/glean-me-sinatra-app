@@ -10,12 +10,12 @@ class ApplicationController < Sinatra::Base
   end
 
 get "/" do
-   if logged_in?
-      @user = current_user
-      erb :'/users/login'
-   else
+   #if logged_in?
+      #@user = current_user
+      #erb :'/users/login'
+   #else
       erb :index
-   end
+   #end
 end
 
 helpers do
