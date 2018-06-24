@@ -3,7 +3,7 @@
 </h2>
 
 <h3>
-<form action="/locations/<%= @location.id %>/edit" method="POST">
+<form action="/locations/<%= @location.id %>/edit" method="POST" id="edit_loc">
     <input type="hidden" name="_method" value="PATCH">
 
     
@@ -40,12 +40,13 @@
 <br>
 <h3>If food category you want to add doesn't exist please click here first:
 <a href="/edibles/new">add new food type</a></h3>
-<br>
+
      
     <label>Change description to:</label>
-      <input type="text" name="description" size="50" value="<%=@location.description%>">
-
- <br>
+   
+   
+      <input type="text" name="description" size="100" value="<%=@location.description%>">
+ 
 <br><input type="submit" value="Submit">
     </h3>
 </form>
