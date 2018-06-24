@@ -22,11 +22,8 @@
         <h3><p>Welcome, <%=current_user.username %></p></h3>
     
         <a href="/locations/new"> Create Location </a>
-        <a href="/logout"> Log Out </a>
 
-      <% else %>
-        <a href="/login"> Sign In </a>
-        <a href="/signup">Sign Up</a>
+      
         
       <%end %>
 
@@ -46,4 +43,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
     <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
   <![endif]-->
+  <dev>
+    <center>
+      <% if logged_in? %>
+    
+<a href="/logout"> Log Out </a>
+
+        
+      <%end %>
+     
+  </dev>
 </body>

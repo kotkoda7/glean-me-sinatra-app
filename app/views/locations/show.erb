@@ -1,18 +1,15 @@
+<h3>Location:
 
-Click on location id for details:
-<ul>
-    <% @location.each do |location| %>
-    <h3>
-        <a href="/locations/<%= location.id%>/edit"><%= location.id%>  </a>
-         
-     <%= location.loc_type%> property, 
-     <%= location.address%>
-     <%= location.lat%>
-     <%= location.lng%>
-     <%= location.description%>
-    </h3>
-    <% end %>
-</ul>
+<%= location.id%>
+<br>
+
+Food type:
+<a href="/edibles/<%= @location.edible.id%>"><%=@location.edible.name%></a>
+
+
+</h3>
+
+
 
 
 <br>

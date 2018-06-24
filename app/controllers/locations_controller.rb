@@ -9,9 +9,15 @@ class LocationsController < ApplicationController
 	get '/locations/new' do
 		authenticate_user
 		@locations = Location.all
+		@edibles = Edible.all
 		erb :'/locations/new'
 	end
 
+	get "/locations/:id/edit" do
+    	authenticate_user
+   		@location = Location.find(params[:id])
+    	erb :'locations/edit'
+    end
 
 	get '/locations/:id' do
 		authenticate_user

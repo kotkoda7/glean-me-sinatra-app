@@ -1,0 +1,60 @@
+<h3>Edit
+    <%=@location.id%>
+</h3>
+
+<form action="/locations/<%= @location.id %>/edit" method="POST">
+    <input type="hidden" name="_method" value="PATCH">
+
+    <h3>
+        <label>Change address</label>
+    </h3>
+    <input type="text" name="address" value="<%=@location.address%>">
+    <br>
+
+    <h3>
+        <label>Change food type</label>
+    </h3>
+    
+
+    <h3>
+        <label>Change latitude</label>
+    </h3>
+    <input type="number" name="lat" value="<%=@location.lat%>">
+
+    <br>
+    <label>Change longitude</label>
+    </h3>
+    <input type="number" name="lng" value="<%=@location.lng%>">
+    <br>
+
+     <h3>
+        <label>Change Description</label>
+    </h3>
+    <input type="text" name="description" value="<%=@location.description%>">
+
+ <br>
+
+    <h3>
+    <label>Choose an food type for this location:</label>
+  </h3>
+
+  <select name="selected_edible">
+    <option value="">
+        -
+      </option>
+   
+      <% @edibles.each do |edible| %>
+        <option value="<%=edible.name%>"><%=edible.name%></option>
+
+      <% end %>
+      <br><input type="submit" value="Submit">
+  </select>
+<br>
+</form>
+
+
+<h1>If food category you want to add doesn't exist please click here first:
+<a href="/edibles/new">Add new food type</a>
+ 
+
+

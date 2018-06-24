@@ -27,9 +27,18 @@
       <label>Choose a food category for this location:</label>
   </h3>
 
- 
+  <select name="location[edible]">
+      <option value="">
+        -
+      </option>
+      <% @edibles.each do |edible| %>
+        <option value="<%=edible.name%>"><%=edible.name%></option>
+      <% end %>
+  </select>
+  <br>
   <input type="submit" value="Add location">
 </form>
+
 
 
   
