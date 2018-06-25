@@ -1,15 +1,16 @@
-<h3>Location:
-
-<%= location.id%>
+<h3>Location address:
+	<%= location.address %> 
+<br>
+Latitude:
+	<%= location.lat %> 
+<br>
+Longitude:
+	<%= location.lng %> 
 <br>
 
 Food type:
 <a href="/edibles/<%= @location.edible.id%>"><%=@location.edible.name%></a>
 
+<br>
 
 </h3>
-
-
-
-
-<br>
