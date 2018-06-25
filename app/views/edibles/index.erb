@@ -1,0 +1,15 @@
+<h1>Available list of food types:</h1>
+
+<% @edibles.each do |edible| %>
+  <%= edible.name %><br />
+
+  <a href="/edibles/<%=edible.name%>/edit">Edit</a>
+  <br />
+  <br />
+
+
+<% end %>
+
+<h3>Back to
+    <a href="/">my locations</a>
+</h3>
