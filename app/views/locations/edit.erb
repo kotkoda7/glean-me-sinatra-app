@@ -3,53 +3,39 @@
 </h2>
 
 <h3>
-<form action="/locations/<%= @location.id %>/edit" method="POST" id="edit_loc">
-    <input type="hidden" name="_method" value="PATCH">
-
-    
-        <label>Change address to: </label>
-    
+<form action="/locations/<%= @location.id %>" method="POST">
+    <label>Change address to: </label>
     <input type="text" name="address" value="<%=@location.address%>">
-    <br>
-
-    
-        <label>Change latitude to: </label>
-    
+  <br>
+    <label>Change latitude to: </label>
     <input type="number" name="lat" value="<%=@location.lat%>">
 
-    <br>
+  <br>
     <label>Change longitude to: </label>
-    
     <input type="number" name="lng" value="<%=@location.lng%>">
-    <br>
-
+    
+  <br>
     <label>Choose an food type for this location:</label>
- 
+    <select name="selected_edible">
+      <option value="">
+          -
+        </option>
+        <% @edibles.each do |edible| %>
+          <option value="<%=edible.name%>"><%=edible.name%></option>
+        <% end %>
+    </select>
+  <br>
+    <h3>If food category you want to add doesn't exist please click here first:
+    <a href="/edibles/new">add new food type</a></h3>
 
-  <select name="selected_edible">
-    <option value="">
-        -
-      </option>
-   
-      <% @edibles.each do |edible| %>
-        <option value="<%=edible.name%>"><%=edible.name%></option>
-
-      <% end %>
-      
-  </select>
-<br>
-<h3>If food category you want to add doesn't exist please click here first:
-<a href="/edibles/new">add new food type</a></h3>
-
-     
     <label>Change description to:</label>
-   
-   
       <input type="text" name="description" size="100" value="<%=@location.description%>">
  
-<br><input type="submit" value="Submit">
+    <br>
+    
+    <input type="submit" value="Submit">
     </h3>
-</form>
+  </form>
 
 
 

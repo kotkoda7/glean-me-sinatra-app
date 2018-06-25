@@ -21,13 +21,13 @@ class LocationsController < ApplicationController
     erb :'locations/edit'
   end
 
-  post "/locations/:id" do
+   post "/locations/:id" do
     authenticate_user
     @location = Location.find(params[:id])
     unless Location.valid_params?(params)
       redirect "/locations/#{@location.id}/edit?error=invalid location"
     end
-    @location.update(params.select{|k| k=="address"})
+    @location.update(params.select{|k| k=="address" || k=="lat"})
     redirect "/locations/#{@location.id}"
   end
 
@@ -37,16 +37,15 @@ class LocationsController < ApplicationController
     erb :'locaitons/show'
   end
 
+  post "/locations" do
+  	authenticate_user
 
-post "/locations" do
-	authenticate_user
+  	unless Location.valid_params?(params)
+    		redirect "/locations/new?error=invalid location"
+  	end
 
-	unless Location.valid_params?(params)
-  		redirect "/locations/new?error=invalid location"
-	end
-
-	Location.create(params)
-	redirect "/locations"
-end
+  	Location.create(params)
+  	redirect "/locations"
+  end
 
 end
