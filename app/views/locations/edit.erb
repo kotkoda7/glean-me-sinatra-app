@@ -21,7 +21,7 @@
       <option value="">
           -
         </option>
-        <% @locations.each do |location| %>
+        <% @locations.each do |loc| %>
           <option value="<%=@location.loc_type%>"><%=@location.loc_type%></option>
         <% end %>
     </select>
@@ -29,13 +29,11 @@
   Food at this location: 
   <%=@edible.name%>
   <br>
+
     <h3><label>Choose a different food for this location:</label>
     <select name="selected_edible">
-      <option value="">
-          -
-        </option>
         <% @edibles.each do |edible| %>
-          <option value="<%=edible.name%>"><%=edible.name%></option>
+          <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> </option>
         <% end %>
     </select>
   
