@@ -15,7 +15,11 @@
     <input type="number" name="lng" value="<%=@location.lng%>">
     
   <br>
-    <label>Choose an food type for this location:</label>
+
+  Food at this location: 
+  <%=@edible.name%>
+  <br>
+    <h3><label>Choose a different food for this location:</label>
     <select name="selected_edible">
       <option value="">
           -
@@ -24,17 +28,18 @@
           <option value="<%=edible.name%>"><%=edible.name%></option>
         <% end %>
     </select>
+  
   <br>
-    <h3>If food category you want to add doesn't exist please click here first:
-    <a href="/edibles/new">add new food type</a></h3>
-
+    If the food you want to add doesn't exist please click here first:
+    <a href="/edibles/new">add new food</a>
+<br>
     <label>Change description to:</label>
       <input type="text" name="description" size="100" value="<%=@location.description%>">
  
     <br>
     
     <input type="submit" value="Submit">
-    </h3>
+   
   </form>
 
 
