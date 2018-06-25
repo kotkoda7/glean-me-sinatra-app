@@ -1,18 +1,17 @@
 
 
-Click on location id for details:
-<ul>
+<h3> Click on location id for details:</h3>
+
+	<ul>
     <% @locations.each do |location| %>
-    <h3>
-        <a href="/locations/<%= location.id%>/edit"><%= location.id%>  </a>
-         
-     
-     <%= location.address%>
-     <%= location.lat%>
-     <%= location.lng%>
-    </h3>
+    <br>
+        <a href="/locations/<%= location.id%>"># <%= location.id%>  </a>
+    <%= location.address%>,
+     <br>Lat.: <%= location.lat%>
+     <br>Long.: <%= location.lng%>
+    <br>
     <% end %>
+<br>
 </ul>
 
 
-<br>

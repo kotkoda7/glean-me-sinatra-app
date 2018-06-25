@@ -33,8 +33,9 @@ class LocationsController < ApplicationController
 
   get "/locations/:id" do
     authenticate_user
+    @edible = Edible.find(params[:id])
     @location = Location.find(params[:id])
-    erb :'locaitons/show'
+    erb :'locations/show'
   end
 
   post "/locations" do
