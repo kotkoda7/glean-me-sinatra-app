@@ -16,6 +16,16 @@
     
   <br>
 
+  <label>Location Type:</label>
+  <select name="selected_location">
+      <option value="">
+          -
+        </option>
+        <% @locations.each do |location| %>
+          <option value="<%=@location.loc_type%>"><%=@location.loc_type%></option>
+        <% end %>
+    </select>
+<br>
   Food at this location: 
   <%=@edible.name%>
   <br>

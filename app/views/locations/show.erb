@@ -1,9 +1,9 @@
 
 
-<h3>Location ID: </h3>
-	#<%= @location.id %> 
-<br>
-<h3>Location address:</h3>
+<h3>Location ID: 
+	#<%= @location.id %> </h3>
+
+<h3>Address:</h3>
 	<%= @location.address %> 
 <br>
 <h3>Latitude:</h3>
@@ -12,9 +12,18 @@
 <h3>Longitude:</h3>
 	<%= @location.lng %> 
 <br>
+<h3>Location type:</h3>
+	<%= @location.loc_type %> 
+<br>
+
 
 <h3>Food available:</h3>
 <%=@edible.name%>
+<br>
+
+<h3>Location description:</h3>
+	<%= @location.description %> 
+
 
 <br>
 <br>

@@ -16,8 +16,8 @@ class LocationsController < ApplicationController
 
   get "/locations/:id/edit" do
     authenticate_user
-    
     @location = Location.find(params[:id])
+    @locations = Location.all
     @edible = Edible.find(params[:id])
     @edibles = Edible.all
     erb :'locations/edit'
@@ -29,7 +29,7 @@ class LocationsController < ApplicationController
     unless Location.valid_params?(params)
       redirect "/locations/#{@location.id}/edit?error=invalid location"
     end
-    @location.update(params.select{|k| k=="address" || k=="lat"})
+    @location.update(params.select{|k| k=="address" || k=="lat" || k=="lng" || k=="description" || k=="edible_id"})
     redirect "/locations/#{@location.id}"
   end
 
