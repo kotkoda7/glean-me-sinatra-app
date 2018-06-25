@@ -1,1 +1,12 @@
-show.erb
+<h2>Name of food type: </h2>
+  <br><%= @edible.name %></br />
+
+  <h2>Food types at this location: </h2>
+  <ul>
+  <% @location.edible.each do |edible| %>
+    <li><a href="/edible/<%=edible.id%>"><%= edible.name %></a></li>
+  <% end%>
+  </ul>
+  <a href="/locations/<%=@location.id%>/edit">Edit</a>
+  <br />
+  <br />
