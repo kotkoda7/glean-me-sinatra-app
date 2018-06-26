@@ -5,19 +5,19 @@
 <h3>
 <form action="/locations/<%= @location.id %>" method="POST">
     <label>Change address to: </label>
-    <input type="text" name="address" value="<%=@location.address%>">
+    <input type="text" name="location[address]" value="<%=@location.address%>">
   <br>
     <label>Change latitude to: </label>
-    <input type="number" name="lat" value="<%=@location.lat%>">
+    <input type="number" name="location[lat]" value="<%=@location.lat%>">
 
   <br>
     <label>Change longitude to: </label>
-    <input type="number" name="lng" value="<%=@location.lng%>">
+    <input type="number" name="location[lng]" value="<%=@location.lng%>">
     
   <br>
 
   <label>Location Type:</label>
-  <select name="selected_location">
+  <select name="loc_type">
       <option value="">
           -
         </option>
@@ -26,17 +26,28 @@
         <% end %>
     </select>
 <br>
-  Food at this location: 
-  <%=@edible.name%>
-  <br>
 
-    <h3><label>Choose a different food for this location:</label>
-    <select name="selected_edible">
+
+Change food available at this location:
+    #1: <select name="edible[name]">
         <% @edibles.each do |edible| %>
           <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> </option>
         <% end %>
     </select>
   
+#2: <select name="edible[name">
+        <% @edibles.each do |edible| %>
+          <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> </option>
+        <% end %>
+    </select>
+
+    #3: <select name="edible[name">
+        <% @edibles.each do |edible| %>
+          <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> </option>
+        <% end %>
+    </select>
+
+
   <br>
     If the food you want to add doesn't exist please click here first:
     <a href="/edibles/new">add new food</a>

@@ -9,33 +9,32 @@ get "/edibles" do
  post "/edibles" do
   	authenticate_user
 
-  	unless Edible.valid_params?(params)
-    	redirect "/edibles/new?error=invalid food type"
-  	end
+  	#unless Edible.valid_params?(params)
+    	#redirect "/edibles/new?error=invalid food type"
+  	#end
 
-  	Edible.create(params)
+    @edible = Edible.create(params[:edible])
   	redirect "/edibles"
   end
 
  get "/edibles/new" do
     authenticate_user
-    @edibles = Edible.all.sort_by &:name
-    erb :'locations/new'
+    erb :'edibles/new'
  end
 
- post "/edibles/new" do
-    authenticate_user
-    @edibles = Edible.all.sort_by &:name
-    erb :'edibles/new'
-  end
 
- get "/edibles/:id" do
+
+
+
+
+=begin
+get "/edibles/:id/edit" do
     authenticate_user
     @edible = Edible.find(params[:id])
-    erb :'edibles/show'
+    erb :'edibles/edit'
   end
 
-  post "/edibles/:id" do
+ post "/edibles/:id" do
     authenticate_user 
     @edible = Edible.find(params[:id])
     unless Edible.valid_params?(params)
@@ -45,11 +44,14 @@ get "/edibles" do
     redirect "/edibles/#{@edible.id}"
   end
 
-  get "/edibles/:id/edit" do
+  get "/edibles/:id" do
     authenticate_user
     @edible = Edible.find(params[:id])
-    erb :'edibles/edit'
+    erb :'edibles/show'
   end
+=end
+
+  
 
   
 end

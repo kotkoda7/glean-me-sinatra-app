@@ -6,11 +6,21 @@ class LocationsController < ApplicationController
     erb :'locations/index'
   end
 
+  post "/locations" do
+    authenticate_user
+
+    unless Location.valid_params?(params)
+        redirect "/locations/new?error=invalid location"
+    end
+
+    Location.create(params[:location])
+    redirect "/locations"
+  end
+
   get "/locations/new" do
     authenticate_user
     @locations = Location.all
     @edibles = Edible.all
-    @error_message = params[:error]
     erb :'locations/new'
   end
 
@@ -40,15 +50,6 @@ class LocationsController < ApplicationController
     erb :'locations/show'
   end
 
-  post "/locations" do
-  	authenticate_user
-
-  	unless Location.valid_params?(params)
-    		redirect "/locations/new?error=invalid location"
-  	end
-
-  	Location.create(params)
-  	redirect "/locations"
-  end
+  
 
 end

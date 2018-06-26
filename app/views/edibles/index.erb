@@ -3,13 +3,10 @@
 <% @edibles.each do |edible| %>
   <%= edible.name %><br />
 
-  <a href="/edibles/<%=edible.name%>/edit">Edit</a>
+  <a href="/edibles/<%=edible.name%>"></a>
   <br />
-  <br />
-
-
 <% end %>
-
+<h3><a href="/edibles/new"> Add </a> new food type 
 <h3>Back to
     <a href="/">my locations</a>
 </h3>
