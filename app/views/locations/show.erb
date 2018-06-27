@@ -18,7 +18,7 @@
 
 
 <h3>Food available</h3>
-<%=@edible.name%>, <%=@edible.name%>, <%=@edible.name%>
+<%=@edible.name%>
 <br>
 
 
@@ -28,7 +28,12 @@
 
 
 <br>
-<br>
-<h3><a href="/locations/<%= @location.edible_id%>/edit"> Edit </a> this entry 
-<br>
+<h3>
+    <a href="/locations/<%=@location.id%>/edit">Edit</a>
+    <br>
+    <a href="/locations/<%=@location.id%>/delete">Delete</a>
+</h3>
 
+<br>
+<br>
+ADD Delete this entry
