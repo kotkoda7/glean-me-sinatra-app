@@ -3,7 +3,7 @@
 <form action="/locations" method="POST">
 
   <label>Choose a location type:</label>
-  <select name="loc_type">
+  <select name="location[loc_type]">
       <option value="">
         -
       </option>
@@ -15,19 +15,19 @@
 <br>
 
 <label> Location address</label>
-  <input type="text" name="address" size="40" > </br>
+  <input type="text" name="location[address]" size="40" > </br>
 
   <label> Latitude</label>
-  <input id="location_lat" name="lat" size="10" type="text" value="">
+  <input id="location_lat" name="location[lat]" size="10" type="text" value="">
 
   <label> Longitude</label>
-  <input id="location_lng" name="lng" size="10" type="text" value=""><br>
+  <input id="location_lng" name="location[lng]" size="10" type="text" value=""><br>
 
   
       <label>Choose a food type for this location:</label>
   
 
-  <select name="add_edible1">
+  <select name="edible[name]">
       <option value="">
         -
       </option>
@@ -36,7 +36,7 @@
       <% end %>
   </select>
  
-  <select name="add_edible2">
+  <select name="edible[name]">
       <option value="">
         -
       </option>
@@ -44,7 +44,7 @@
         <option value="<%=edible.name%>"><%=edible.name%></option>
       <% end %>
   </select>
-  <select name="add_edible3">
+  <select name="edible[name]">
       <option value="">
         -
       </option>

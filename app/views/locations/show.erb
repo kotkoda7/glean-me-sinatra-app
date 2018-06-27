@@ -17,21 +17,11 @@
 <br>
 
 
-<h3>Food available #1:</h3>
+<h3>Food available</h3>
 <%=@edible.name%>
 <br>
 
-<% @location.edibles.each do |edible| %>
-    <li><a href="/edible/<%=edible.id%>"><%= edible.name %></a></li>
-  <% end%>
 
-<h3>Food available #2:</h3>
-<%=@edible.name%>
-<br>
-
-<h3>Food available #3:</h3>
-<%=@edible.name%>
-<br>
 
 <h3>Location description:</h3>
 	<%= @location.description %> 
@@ -39,6 +29,6 @@
 
 <br>
 <br>
-<h3><a href="/locations/<%= @location.edible_id%>/edit"> Edit </a> location 
+<h3><a href="/locations/<%= @location.edible_id%>/edit"> Edit </a> this entry 
 <br>
 
