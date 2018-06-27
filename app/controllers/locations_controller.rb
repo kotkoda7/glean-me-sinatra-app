@@ -57,16 +57,14 @@ class LocationsController < ApplicationController
     erb :'/locations/add_edible'
   end
 
-  post '/artists/:id/add_song' do
+  post '/locations/:id/add_edible' do
     @location = Location.find_by_id(params[:id])
     if !params[:edible_name].empty?
       Edible.create(name: params[:edible_name], location: @location, user: current_user)
 
-      flash[:message] = "Food is successfully added."
-      redirect "/locations/#{@location.slug}"
+      redirect "/locations/#{@location.id}"
     else
-      flash[:message] = "Enter the food name."
-      redirect "/locations/#{@location.slug}/add_song"
+      redirect "/locations/#{@location.id}/add_edible"
     end
   end
 
