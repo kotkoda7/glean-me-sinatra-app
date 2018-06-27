@@ -92,16 +92,16 @@ end
 
 get '/locations/:id/delete' do
     authenticate_user
-    @location = Location.find_by_id(params[:id])
+    @location = Location.find(params[:id])
     @edible = @location.edible_id
-    if @location.user == current_user
-      @location.destroy
+   if @location.user == current_user
+      @location.delete
 
       #flash[:message] = "The location is successfully deleted."
-      redirect "/edibles/#{@location.id}"
+      redirect "/locations"
     else
       #flash[:message] = "You cannot delete another user's location."
-      redirect to "/locations/#{@location.id}"
+      redirect to "/locations"
     end
   end
 
