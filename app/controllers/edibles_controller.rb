@@ -24,10 +24,6 @@ get "/edibles" do
 
 
 
-
-
-
-=begin
 get "/edibles/:id/edit" do
     authenticate_user
     @edible = Edible.find(params[:id])
@@ -38,7 +34,7 @@ get "/edibles/:id/edit" do
     authenticate_user 
     @edible = Edible.find(params[:id])
     unless Edible.valid_params?(params)
-      redirect "/edibles/#{@edible.id}/edit?error=invalid food type"
+      redirect "/edibles/#{@edible.id}/edit"
     end
     @edible.update(params.select{|k|k=="name"})
     redirect "/edibles/#{@edible.id}"
@@ -49,7 +45,7 @@ get "/edibles/:id/edit" do
     @edible = Edible.find(params[:id])
     erb :'edibles/show'
   end
-=end
+
 
   
 

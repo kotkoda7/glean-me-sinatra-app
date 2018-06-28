@@ -18,7 +18,11 @@
 
 
 <h3>Food available:</h3>
-<%=@edible.name%>
+<% @location.edibles.each do |edible|%>
+<ul>
+	<li><<%= edible.name %></li>
+	<%end%>
+</ul>
 <br>
 
 

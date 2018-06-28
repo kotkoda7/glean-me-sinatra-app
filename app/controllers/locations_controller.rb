@@ -69,6 +69,7 @@ end
   get "/locations/:id" do
     authenticate_user
     @edible = Edible.find_by_id(params[:id])
+    @edibles = Edible.all
     @location = Location.find_by_id(params[:id])
     erb :'locations/show'
   end
@@ -82,17 +83,14 @@ end
   end
 
   post '/locations/:id/add_edible' do
-    @location = Location.find_by_id(params[:id])
-    if !params[:edible_name].empty?
-      Edible.create(name: params[:selected_edible], address: params[:location][:address], 
-        lat: params[:location][:lat], 
-        lng: params[:location][:lng],
-        #loc_type: params[:location][:loc_type],
-        description: params[:location][:description],
-        user: current_user)
+      @location = Location.find_by_id(params[:id])
+    if !params[:edible1].empty?
+      Edible.create(name: params[:edible1], name: params[:edible2]), location: @location, user: current_user)
 
+     flash[:message] = "The food item is successfully added."
       redirect to "/locations/#{@location.id}"
     else
+      flash[:message] = "Enter the food item."
       redirect to "/locations/#{@location.id}/add_edible"
     end
   end
@@ -104,10 +102,10 @@ get '/locations/:id/delete' do
    if @location.user == current_user
       @location.delete
 
-      #flash[:message] = "The location is successfully deleted."
+      flash[:message] = "The location is successfully deleted."
       redirect "/locations"
     else
-      #flash[:message] = "You cannot delete another user's location."
+      flash[:message] = "You cannot delete another user's location."
       redirect to "/locations"
     end
   end

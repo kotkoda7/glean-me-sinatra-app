@@ -10,13 +10,16 @@
 	<h3
 
 <form action="/locations/<%=@location.id%>/add_edible" method="post">
-
-  <label> Add food to this location: </label>
-
-  <input type="text" name="[edible]name1"> </br>
-
-   <input type="submit" value="Add food">
+  <input type="text" name="[location]edible1">
+  <input type="submit" value="Add food">
 </form>
+<br>
+<form action="locations/add_edible" method="post">
+  <input type="text" name="[location]edible2">
+  <input type="submit" value="Add food">
+</form>
+
+
   <br>
 
 Go to location:
