@@ -12,3 +12,4 @@ dumpster = Edible.create(id: 7, name: "Dumpster")
 
 User.create(id: 1, username: "Roxie", password: "abcd", location_id: 1)
 User.create(id:2, username: "Leo", password: "efgh", location_id: 1)
+User.create(id:3, username: "Me", password: "free", location_id: 2)

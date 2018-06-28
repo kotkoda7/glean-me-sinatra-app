@@ -32,13 +32,14 @@ class UsersController < ApplicationController
     end
   end
 
-get '/login' do 
-    if !logged_in?
-      erb :'users/login'
-    else
+get '/login' do
+    if logged_in?
+      flash[:message] = "You are already logged in."
       redirect '/locations'
+    else
+      erb :'users/login'
     end
-  end
+end
 
   post '/login' do
     user = User.find_by(:username => params[:username])
@@ -46,7 +47,8 @@ get '/login' do
       session[:user_id] = user.id
       redirect "/locations"
     else
-      redirect to '/signup'
+      flash[:message] = "Invalid username or/and password. Please try again."
+      redirect '/login'
     end
   end
 

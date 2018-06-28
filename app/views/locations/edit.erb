@@ -27,12 +27,14 @@
 <br>
 
 Change food available at this location:
-     <select name="edible[name1]">
+     <ul>
+     <li><select name="edible[name1]"></li>
         <% @edibles.each do |edible| %>
           <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
         </option>     
         <% end %>
     </select>
+  </ul>
 
       <select name="edible[name2]">
         <% @edibles.each do |edible| %>

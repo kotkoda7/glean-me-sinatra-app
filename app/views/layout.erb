@@ -16,8 +16,13 @@
 <body>
   <nav>
     <center>
-    
-    
+ <br>
+    <div class="flash">
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% end %>
+    </div>
+   
       <% if logged_in? %>
 
         <br>
