@@ -18,22 +18,26 @@
 
 
 <h3>Food available</h3>
-<%=@edible.name%>
-<br>
+<% @edibles.each do |edible|%>
+<ul>
+	<li><%=@edible.name%></li>
+	<%end%>
+</ul>
 
+<br>
 
 
 <h3>Location description:</h3>
 	<%= @location.description %> 
 
-
+<nav>
 <br>
 <h3>
-    <a href="/locations/<%=@location.id%>/edit">Edit</a>
-    <br>
-    <a href="/locations/<%=@location.id%>/delete">Delete</a>
+    <a href="/locations/<%=@location.id%>/edit">Edit</a>    
+    
+    <a href="/locations/<%=@location.id%>/delete">Delete</a>    
+	<br>
+    Back to library of <a href="/locations">locations</a>
+<br>
 </h3>
-
-<br>
-<br>
-ADD Delete this entry
+</nav>

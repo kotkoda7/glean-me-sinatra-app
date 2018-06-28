@@ -28,13 +28,14 @@ class LocationsController < ApplicationController
 
 post '/locations/new' do
     authenticate_user
-    params[:location][:edible] = params[:location][:selected_edible] if !params[:location][:selected_edible].empty? 
+    params[:location][:edible] = params[:edible][:name1] if !params[:edible][:name1].empty?
+    params[:location][:edible] = params[:edible][:name2] if !params[:edible][:name2].empty? 
     if !params[:location][:address].empty? && !params[:location][:edible].empty?
       edible = Edible.find_or_create_by(name: params[:location][:edible])
       @location = Location.create(address: params[:location][:address], 
         lat: params[:location][:lat], 
         lng: params[:location][:lng],
-        loc_type: params[:location][:loc_type],
+        #loc_type: params[:location][:loc_type],
         description: params[:location][:description],
         user_id: current_user.id)
 
@@ -68,6 +69,7 @@ end
   get "/locations/:id" do
     authenticate_user
     @edible = Edible.find(params[:id])
+    @edibles = Edible.all
     @location = Location.find(params[:id])
     erb :'locations/show'
   end
@@ -82,7 +84,12 @@ end
   post '/locations/:id/add_edible' do
     @location = Location.find_by_id(params[:id])
     if !params[:edible_name].empty?
-      Edible.create(name: params[:edible_name], location: @location, user: current_user)
+      Edible.create(name: params[:edible_name1], name: params[:edible_name2], address: params[:location][:address], 
+        lat: params[:location][:lat], 
+        lng: params[:location][:lng],
+        #loc_type: params[:location][:loc_type],
+        description: params[:location][:description],
+        user_id: current_user.id)
 
       redirect to "/locations/#{@location.id}"
     else

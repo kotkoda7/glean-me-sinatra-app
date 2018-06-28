@@ -16,34 +16,37 @@
     
   <br>
 
-  <label>Location Type:</label>
+  <label>Location type:</label>
 <select name="location[loc_type]">
-      <option value="">
-        -
-      </option>
-      <% @locations.each do |location| %>
-        <option value="<%=location.loc_type%>"><%=location.loc_type%>
-        </option>
-      <% end %>
-  </select>
+        <% @locations.each do |location| %>
+          <option value=<%=@location.id%> <%= "selected" if location.id==@location.edible_id%> ><%=location.loc_type%> 
+        </option>     
+        <% end %>
+    </select>
 <br>
 <br>
 
 Change food available at this location:
-     <select name="edible[name]">
+     <select name="edible[name1]">
         <% @edibles.each do |edible| %>
           <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
         </option>     
         <% end %>
-    
+    </select>
+
+      <select name="edible[name2]">
+        <% @edibles.each do |edible| %>
+          <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
+        </option>     
+        <% end %>
     </select>
   
 <h3>
-  Add new food to this location:
+  Add another food item to this location:
     <a href="/locations/<%=@location.id%>/add_edible">Add food</a>
 </h3>
 
-    If the food category you want to add doesn't exist please click here first:
+    If it doesn't exist in our database please click here first:
     <a href="/edibles/new">add category</a>
 <br>
 <br>
