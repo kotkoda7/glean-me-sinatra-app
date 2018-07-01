@@ -1,7 +1,20 @@
 <h2>Fill out this form to add a new location:</h2>
+<br>
 <h3>
-<form action="/locations/new" method="POST">
+  <form action="/locations/new" method="POST">
+  <label> Location address</label>
+  <input type="text" name="location[address]" size="40" > </br>
 
+  <label> Latitude</label>
+  <input id="location_lat" name="location[lat]" size="10" type="text" value="">
+
+  <label> Longitude</label>
+  <input id="location_lng" name="location[lng]" size="10" type="text" value=""><br>
+
+<label> Description</label>
+<input type="text" name="location[description]" size="80" value="">
+
+<br>
   <label>Choose a location type:</label>
   <select name="location[loc_type]">
       <option value="">
@@ -14,37 +27,28 @@
   </select>
 <br>
 
-<label> Location address</label>
-  <input type="text" name="location[address]" size="40" > </br>
-
-  <label> Latitude</label>
-  <input id="location_lat" name="location[lat]" size="10" type="text" value="">
-
-  <label> Longitude</label>
-  <input id="location_lng" name="location[lng]" size="10" type="text" value=""><br>
-
-<label> Description</label>
-<input type="text" name="location[description]" size="80" value="">
-
   <h3><label>Choose a food type for this location:</label>
   
-  <select name="location[selected_edible]">
+  <select name="location[selected_edible1]">
         <option value="">-</option>
         <% @edibles.each do |edible| %>
           <option value="<%=edible.name%>"><%=edible.name%></option>
         <% end %>
     </select>
 
-    <select name="location[selected_edible]">
+    <select name="location[selected_edible2]">
         <option value="">-</option>
         <% @edibles.each do |edible| %>
           <option value="<%=edible.name%>"><%=edible.name%></option>
         <% end %>
     </select>
-   
-        <label> or add a new one </label>
-    <input type="text" name="location[edible]"> </h3>
+  </h3>
 
-    <input type="submit" value="Add location">
+<br>
+If you need to add a new food category, please add it here first:
+<br>
+  <label> Name of new food category: </label>
+  <input type="text" name="location[edible]"> </br>
+  <input type="submit" value="Add location">
 </form>
 

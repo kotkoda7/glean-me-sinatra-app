@@ -10,3 +10,15 @@
 <h3>Back to library of
     <a href="/locations">locations</a>
 </h3>
+
+<br>
+
+<ul>
+    <% @edibles.each do |edible| %>
+    <h3>
+        <a href="/edibles/<%= edible.id%>">"<%= edible.name%>"</a>
+        by
+        <%= edible.location.name%>
+    </h3>
+    <% end %>
+</ul>

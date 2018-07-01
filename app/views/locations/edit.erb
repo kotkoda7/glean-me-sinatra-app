@@ -3,7 +3,9 @@
 </h2>
 
 <h3>
-<form action="/locations/<%= @location.id %>" method="POST">
+<form action="/locations/<%= @location.id %>"/edit method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  
     <label>Change address to: </label>
     <input type="text" name="location[address]" value="<%=@location.address%>">
   <br>

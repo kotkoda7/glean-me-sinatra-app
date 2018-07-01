@@ -17,12 +17,13 @@ get "/edibles" do
   	redirect "/edibles"
   end
 
+=begin
  get "/edibles/new" do
     authenticate_user
     erb :'edibles/new'
  end
 
-
+=end
 
 get "/edibles/:id/edit" do
     authenticate_user

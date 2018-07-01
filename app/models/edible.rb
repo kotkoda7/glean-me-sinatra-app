@@ -2,8 +2,8 @@ class Edible < ActiveRecord::Base
 	has_many :locations
 	has_many :users
 
-	def self.valid_params?(params)
-    	return !params[:name].empty? && !params[:id].empty?
-  	end
+	#def self.valid_params?(params)
+    	#return !params[:name].empty? && !params[:id].empty?
+  	#end
   	
 end
