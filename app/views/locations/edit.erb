@@ -3,7 +3,7 @@
 </h2>
 
 <h3>
-<form action="/locations/<%= @location.id %>"/edit method="POST">
+<form action="/locations/<%= @location.id %>/edit" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   
     <label>Change address to: </label>
@@ -29,30 +29,24 @@
 <br>
 
 Change food available at this location:
+
      <ul>
-     <li><select name="edible[name1]"></li>
+     <li><select name="location[edible1]"></li>
         <% @edibles.each do |edible| %>
-          <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
+          <option value=<%=@edible_id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
         </option>     
         <% end %>
     </select>
   </ul>
 
-      <select name="edible[name2]">
+      <select name="location[edible2]">
         <% @edibles.each do |edible| %>
-          <option value=<%=@edible.id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
+          <option value=<%=@edible_id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
         </option>     
         <% end %>
     </select>
   
-<h3>
-  Add another food item to this location:
-    <a href="/locations/<%=@location.id%>/add_edible">Add food</a>
-</h3>
 
-    If it doesn't exist in our database please click here first:
-    <a href="/edibles/new">add category</a>
-<br>
 <br>
     <label>Change description to:</label>
       <input type="text" name="location[description]" size="80" value="<%=@location.description%>">

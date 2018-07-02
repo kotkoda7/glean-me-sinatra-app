@@ -1,8 +1,6 @@
 require './config/environment'
-require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
-  use Rack::Flash
 
     configure do
     set :public_folder, 'public'
@@ -20,7 +18,6 @@ get "/" do
    end
 end
 
-
 helpers do
     
     def logged_in?
@@ -36,8 +33,7 @@ helpers do
 
   def authenticate_user
       if !logged_in?
-        flash[:message] = "You must be logged in to access this page"
-        redirect "/login"
+        redirect "/login?error=You have to be logged in to do that"
       end
   end
   end

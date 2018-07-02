@@ -18,8 +18,9 @@
 
 
 <h3>Food available:</h3>
-<%=@edible.name%>,
-<%=@edible.name%>
+<% @edibles.each do |edible| %>
+    <%= edible.name if edible.id==@location.edible_id%>
+<% end %>
 <br>
 
 

@@ -7,46 +7,43 @@ get "/edibles" do
  end
 
  post "/edibles" do
-  	authenticate_user
-
-  	#unless Edible.valid_params?(params)
-    	#redirect "/edibles/new?error=invalid food type"
-  	#end
+    authenticate_user
 
     @edible = Edible.create(params[:edible])
-  	redirect "/edibles"
+    redirect "/edibles"
   end
 
-=begin
  get "/edibles/new" do
     authenticate_user
     erb :'edibles/new'
  end
 
-=end
 
+
+
+
+
+=begin
 get "/edibles/:id/edit" do
     authenticate_user
     @edible = Edible.find(params[:id])
     erb :'edibles/edit'
   end
-
  post "/edibles/:id" do
     authenticate_user 
     @edible = Edible.find(params[:id])
     unless Edible.valid_params?(params)
-      redirect "/edibles/#{@edible.id}/edit"
+      redirect "/edibles/#{@edible.id}/edit?error=invalid food type"
     end
     @edible.update(params.select{|k|k=="name"})
     redirect "/edibles/#{@edible.id}"
   end
-
   get "/edibles/:id" do
     authenticate_user
     @edible = Edible.find(params[:id])
     erb :'edibles/show'
   end
-
+=end
 
   
 
