@@ -1,18 +1,31 @@
-location:
+<h2>Details of location #<%= @location.id%>:</h2>
+
+<h3>Address: 
     <%=@location.address%>
     <br>
-    edible:
-    <a href="/edibles/<%= @location.edible.id%>"><%= @location.edible.name%></a>
-
-
-<% if @location.user == current_user%>
-<h3>
-    <a href="/locations/<%=@location.id%>/edit">Edit</a>
+Latitude:
+	<%=@location.lat%>
+<br>
+Longitude:
+	<%=@location.lng%>
     <br>
+Location type:
+	<%=@location.loc_type%>
+    <br>
+Food available:
+    <a href="/edibles/<%= @location.edible.id%>"><%= @location.edible.name%></a>
+<br>
+Description:
+	<%=@location.description%>
+<br>
+<br>
+<% if @location.user == current_user%>
+<center><h3>
+    <a href="/locations/<%=@location.id%>/edit">Edit</a>
     <a href="/locations/<%=@location.id%>/delete">Delete</a>
 </h3>
-<% end %>
-
+<% end %></center>
+<br>
 <h3>Back to
     <a href="/">My Locations</a>
 </h3>
