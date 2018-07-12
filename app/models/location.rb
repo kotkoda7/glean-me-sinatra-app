@@ -1,9 +1,6 @@
 class Location < ActiveRecord::Base
+  
 
-	belongs_to :user
-	has_many :edibles
-
-
- 
-	
+  belongs_to :edible
+  belongs_to :user
 end

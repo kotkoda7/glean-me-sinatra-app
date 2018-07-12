@@ -1,40 +1,22 @@
+location:
+    <%=@location.address%>
+    <br>
+    edible:
+    <a href="/edibles/<%= @location.edible.id%>"><%= @location.edible.name%></a>
 
 
-<h3>Location ID: 
-	#<%= @location.id %> </h3>
-
-<h3>Address:</h3>
-	<%= @location.address %> 
-<br>
-<h3>Latitude:</h3>
-	<%= @location.lat %> 
-<br>
-<h3>Longitude:</h3>
-	<%= @location.lng %> 
-<br>
-<h3>Location type:</h3>
-	<%= @location.loc_type %> 
-<br>
-
-
-<h3>Food available:</h3>
-<% @edibles.each do |edible| %>
-    <%= edible.name if edible.id==@location.edible_id%>
-<% end %>
-<br>
-
-
-<h3>Location description:</h3>
-	<%= @location.description %> 
-
-<nav>
-<br>
+<% if @location.user == current_user%>
 <h3>
-    <a href="/locations/<%=@location.id%>/edit">Edit</a>    
-    
-    <a href="/locations/<%=@location.id%>/delete">Delete</a>    
-	<br>
-    Back to library of <a href="/locations">locations</a>
-<br>
+    <a href="/locations/<%=@location.id%>/edit">Edit</a>
+    <br>
+    <a href="/locations/<%=@location.id%>/delete">Delete</a>
 </h3>
-</nav>
+<% end %>
+
+<h3>Back to
+    <a href="/">My Locations</a>
+</h3>
+
+<h3>Back to
+    <a href="/locations">All locations</a>
+</h3>

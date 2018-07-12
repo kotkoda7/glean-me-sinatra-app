@@ -8,14 +8,14 @@
 
   nav {
     display: block;
-}
-
-.flash {
-    color: red;
-    font-size: 20px;
   }
 
-html, body {
+  .flash {
+    color: red;
+    font-size: 15px;
+  }
+
+  html, body {
     height: 100%;
     width: 100%;
   }

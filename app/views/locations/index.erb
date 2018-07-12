@@ -1,8 +1,7 @@
 
-
 <h3> Click on location id for details:</h3>
 
-	<ul>
+  <ul>
     <% @locations.each do |location| %>
     <br>
         <a href="/locations/<%= location.id%>"><%= location.id%>  </a>
@@ -13,5 +12,3 @@
     <% end %>
 <br>
 </ul>
-
-

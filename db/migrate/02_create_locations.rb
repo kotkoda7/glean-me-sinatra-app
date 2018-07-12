@@ -1,15 +1,15 @@
-
-
 class CreateLocations < ActiveRecord::Migration
   def change
-  	create_table :locations do |t|
+    create_table :locations do |t|
+      t.string :address
+      t.float :lat
+  	  t.float :lng
       t.integer :user_id
       t.integer :edible_id
-  		t.string :loc_type
-  		t.float :lat
-  		t.float :lng
-  		t.text :address
-  		t.text :description
-  	end
+      t.string :loc_type
+  	  t.text :description
+
+      t.timestamps null: false
+    end
   end
 end

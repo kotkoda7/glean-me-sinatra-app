@@ -30,19 +30,13 @@
 
   <h3><label>Choose a food type for this location:</label>
   
-  <select name="location[selected_edible1]">
+  <select name="location[selected_edible]">
         <option value="">-</option>
         <% @edibles.each do |edible| %>
           <option value="<%=edible.name%>"><%=edible.name%></option>
         <% end %>
     </select>
 
-    <select name="location[selected_edible2]">
-        <option value="">-</option>
-        <% @edibles.each do |edible| %>
-          <option value="<%=edible.name%>"><%=edible.name%></option>
-        <% end %>
-    </select>
   </h3>
 
 <br>
