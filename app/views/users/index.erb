@@ -1,7 +1,6 @@
 
 
-<% if !@user.edibles.empty? && !@user.locations.empty? %>
-
+<% if !@user.locations.empty? %>
   
     <h2>This is a list of your entered locations:</h2>
    
@@ -15,12 +14,18 @@
 </li>
 <% end %>
 
-<% elsif @user.edibles.empty? && @user.locations.empty? %>
->Your location library is currently empty
+<% elsif @user.locations.empty? %>
+
+<h3>Your location library is currently empty.</h3>
+
 <% end %>
 
 <br>
+<h3>
+    <a href="/">My Locations</a>
+<br>
     <a href="/locations">All locations</a>
 <br>
-    <a href="/edibles">All edibles</a>
+    <a href="/edibles">All food categories</a>
 
+</h3>

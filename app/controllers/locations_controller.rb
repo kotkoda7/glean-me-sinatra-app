@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  require 'pry'
 
   get '/locations' do
     authenticate_user
@@ -35,9 +36,13 @@ class LocationsController < ApplicationController
 
   get '/locations/:id' do
     authenticate_user
-    @location = Location.find_by_id(params[:id])
+    @location = Location.find(params[:id])
+    @edibles = Edible.all
     if @location
+
+            #binding.pry
       erb :'/locations/show'
+
     else
       flash[:message] = "This location does not exist"
       redirect '/locations'
@@ -65,11 +70,17 @@ class LocationsController < ApplicationController
   patch '/locations/:id/edit' do
     authenticate_user
     @location = Location.find_by_id(params[:id])
-    if !params[:location][:edible].empty? && !params[:location][:name].empty?
+    if !params[:location][:address].empty?
       if edible ||= Edible.find_by(name: params[:location][:edible])
-        @location.update(name: params[:location][:name], edible: edible)
-      else edible = Edible.create(name: params[:location][:edible], user_id: current_user.id)
-        @location.update(address: params[:location][:address], edible: edible)
+        @location.update(address: params[:location][:address], 
+        lat: params[:location][:lat], lng: params[:location][:lng], 
+        description: params[:location][:description], 
+        loc_type: params[:location][:loc_type], edible: edible)
+      else edible = Edible.create(name: params[:location][:edible])
+        @location.update(address: params[:location][:address], 
+        lat: params[:location][:lat], lng: params[:location][:lng], 
+        description: params[:location][:description], 
+        loc_type: params[:location][:loc_type], edible: edible)
       end
       flash[:message] = "The location is successfully updated."
       redirect to "/locations/#{@location.id}"
@@ -79,20 +90,7 @@ class LocationsController < ApplicationController
     end
   end
 
-  get '/locations/:id/delete' do
-    authenticate_user
-    @location = Location.find_by_id(params[:id])
-    @edible = @location.edible
-    if @location.user == current_user
-      @location.destroy
-
-      flash[:message] = "The location is successfully deleted."
-      redirect "/edibles/#{@edible.id}"
-    else
-      flash[:message] = "You cannot delete another user's location."
-      redirect to "/locations/#{@location.id}"
-    end
-  end
+ 
 
    get '/locations/:id/add_edible' do
     authenticate_user
@@ -112,4 +110,20 @@ class LocationsController < ApplicationController
       redirect "/locations/#{@location.id}/add_edible"
     end
   end
+
+  get '/locations/:id/delete' do
+    authenticate_user
+    @location = Location.find(params[:id])
+    @edible = @location.edible_id
+    if @location.user == current_user
+      @location.destroy
+
+      flash[:message] = "The location is successfully deleted."
+      redirect '/locations'
+    else
+      flash[:message] = "You cannot delete another user's location."
+      redirect to "/locations/#{@location.id}"
+    end
+  end
+
 end

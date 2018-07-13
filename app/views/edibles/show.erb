@@ -1,17 +1,15 @@
+<h2>Details for <%= @edible.name%>:</h2>
+
+
+
+
 <% if !@edible.locations.empty? %>
 
-  <h2>locations by
-      <%=@edible.name%>:</h2>
+  
 
-  <ul>
-      <%@edible.locations.each do |location| %>
-      <li>
-          <a href="/locations/<%= location.id%>"><%= location.name%></a>
-      </li>
-      <% end %>
-  </ul>
+  
 <% else %>
-  <h2>There are no locations by
+  <h2>There are no food to show by
       <%=@edible.name%>... yet</h2>
 <% end %>
 

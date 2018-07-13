@@ -20,7 +20,7 @@
 <label>Location type:</label>
 <select name="location[loc_type]">
         <% @locations.each do |location| %>
-          <option value=<%=@location.id%> <%= "selected" if location.id==@location.edible_id%> ><%=location.loc_type%> 
+          <option value=<%=@location.loc_type%> <%= "selected" if location.id==@location.edible_id%> ><%=location.loc_type%> 
         </option>     
         <% end %>
     </select>

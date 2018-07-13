@@ -9,6 +9,7 @@ class EdiblesController < ApplicationController
   get '/edibles/:id' do
     authenticate_user
       @edible = Edible.find_by_id(params[:id])
+      @edibles = Edible.all
       erb :'/edibles/show'
   end
 

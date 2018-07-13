@@ -1,23 +1,31 @@
 <h2>Details of location #<%= @location.id%>:</h2>
 
-<h3>Address: 
-    <%=@location.address%>
-    <br>
-Latitude:
-	<%=@location.lat%>
+<h3>Location ID: 
+    #<%= @location.id %> </h3>
+
+<h3>Address:</h3>
+    <%= @location.address %> 
 <br>
-Longitude:
-	<%=@location.lng%>
-    <br>
-Location type:
-	<%=@location.loc_type%>
-    <br>
-Food available:
-    <a href="/edibles/<%= @location.edible.id%>"><%= @location.edible.name%></a>
+<h3>Latitude:</h3>
+    <%= @location.lat %> 
 <br>
-Description:
-	<%=@location.description%>
+<h3>Longitude:</h3>
+    <%= @location.lng %> 
 <br>
+<h3>Location type:</h3>
+    <%= @location.loc_type %> 
+<br>
+
+<h3>Food available:</h3>
+<% @edibles.each do |edible| %>
+    <%= edible.name if edible.id==@location.edible_id%>
+<% end %>
+<br>
+
+<h3>Location description:</h3>
+    <%= @location.description %> 
+
+
 <br>
 <% if @location.user == current_user%>
 <center><h3>
