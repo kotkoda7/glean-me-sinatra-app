@@ -25,27 +25,23 @@
         <% end %>
     </select>
 <br>
-<br>
+
 
 Change food available at this location:
 
      <ul>
      <li><select name="location[edible]"></li>
         <% @edibles.each do |edible| %>
-          <option value=<%=@edible_id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> 
-        </option>     
+        <option value=<%=@edible_id%> <%= "selected" if edible.id==@location.edible_id%> ><%=edible.name%> </option>    
         <% end %>
     </select>
   </ul>
 
-     
-  
 
-<br>
+
     <label>Change description to:</label>
       <input type="text" name="location[description]" size="80" value="<%=@location.description%>">
- 
-    <br>
+<br>
     
     <input type="submit" value="Submit">
    

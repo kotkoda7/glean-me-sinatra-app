@@ -19,12 +19,15 @@ class LocationsController < ApplicationController
 
     if !params[:location][:address].empty? && !params[:location][:edible].empty?
       edible = Edible.find_or_create_by(name: params[:location][:edible])
-      @location = Location.create(address: params[:location][:address], edible: edible, user_id: current_user.id)
+      @location = Location.create(address: params[:location][:address], 
+        lat: params[:location][:lat], lng: params[:location][:lng], 
+        description: params[:location][:description], 
+        loc_type: params[:location][:loc_type], edible: edible, user_id: current_user.id)
 
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
     else
-      flash[:message] = "Both fields must be filled in. Please complete the form."
+      flash[:message] = "All fields must be filled in. Please complete the form."
       redirect '/locations/new'
     end
   end
@@ -71,7 +74,7 @@ class LocationsController < ApplicationController
       flash[:message] = "The location is successfully updated."
       redirect to "/locations/#{@location.id}"
     else
-      flash[:message] = "Both fields must be filled in. Please complete the form."
+      flash[:message] = "All fields must be filled in. Please complete the form."
       redirect to "/locations/#{@location.id}/edit"
     end
   end

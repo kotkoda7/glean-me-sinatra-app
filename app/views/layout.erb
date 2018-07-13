@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="/stylesheets/main.css" />
 </head>
 <body>
+
   <nav>
     <center>
       <% if logged_in? %>
@@ -29,11 +30,15 @@
         
       <%end %>
 
-     
-
     </nav>
 
   <div class="wrapper">
+    <div class="flash">
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% end %>
+    </div>
+
 
       <%= yield %>
 
