@@ -43,9 +43,11 @@ class LocationsController < ApplicationController
 
   get '/locations/:id/edit' do
     authenticate_user
-    @location = Location.find_by_id(params[:id]) #-> Instance of the location || nil
+    @location = Location.find_by_id(params[:id]) 
+    @locations = Location.all
+    @edibles = Edible.all
     if @location && @location.user == current_user
-      erb :'/locations/edit_location'
+      erb :'/locations/edit'
     elsif @location && !@location.user == current_user
       flash[:message] = "You cannot change another user's location."
       redirect to "/locations/#{@location.id}"

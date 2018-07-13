@@ -1,11 +1,9 @@
-<h1>Hello,
-    <%= @user.username %>
-</h1>
+
 
 <% if !@user.edibles.empty? && !@user.locations.empty? %>
- <h2>
+
   
-    <h3>This is a list of your entered locations:</h3>
+    <h2>This is a list of your entered locations:</h2>
    
     Click on a location ID to add any changes.
 <br>
@@ -13,24 +11,16 @@
 <% @user.locations.each do |location| %>
 <li>
     <a href="/locations/<%=location.id%>">
-       #<%= location.id %> </a>, <%= location.address %> <%=location.edible.name%>
+       Location #<%= location.id %></a>: <%= location.address %>, <%= location.lat %>, <%= location.lng %> <%=location.edible.name%>
 </li>
 <% end %>
 
 <% elsif @user.edibles.empty? && @user.locations.empty? %>
 >Your location library is currently empty
 <% end %>
+
 <br>
->Add
-    <a href="/locations/new">new locations</a>,
-
-<li>
-    
-        <a href="/edibles">All edibles</a>
-    </li>
-
-<li>
-    
-        <a href="/locations">All locations</a>
-    </li>
+    <a href="/locations">All locations</a>
+<br>
+    <a href="/edibles">All edibles</a>
 
