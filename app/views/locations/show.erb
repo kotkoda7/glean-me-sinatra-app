@@ -17,27 +17,8 @@
 <br>
 
 <h3>Food available:</h3>
+<%= @edible.name %>
 <br>
-
-<% @location.edibles.each do |e| %>
-    <li><a href="/edibles/<%=e.id%>"><%= e.name %></a></li>
-  <% end%>
-
 <h3>Location description:</h3>
     <%= @location.description %> 
 
-<br>
-<% if @location.user == current_user%>
-<center><h3>
-    <a href="/locations/<%=@location.id%>/edit">Edit</a>
-    <a href="/locations/<%=@location.id%>/delete">Delete</a>
-</h3>
-<% end %></center>
-<br>
-<h3>Back to
-    <a href="/">My Locations</a>
-</h3>
-
-<h3>Back to
-    <a href="/locations">All locations</a>
-</h3>

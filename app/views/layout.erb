@@ -27,12 +27,9 @@
       <% if logged_in? %>
     
 <a href="/logout">   Log Out </a>
-
         
       <%end %>
-
       <%end %>
-
     </nav>
 
   </h3>
@@ -60,7 +57,7 @@
   <dev>
 <center>
 <h3>
-    <br>
+
 <% if @user == current_user && !@user.locations.empty?%>
 
   <h3>
@@ -68,8 +65,7 @@
       <a href="/locations/<%=@location.id%>/delete">Delete</a>
   </h3>
   <% end %>
-
-
+<h3>
     <a href="/locations">All locations</a>
 
     <a href="/edibles">  All food categories</a>

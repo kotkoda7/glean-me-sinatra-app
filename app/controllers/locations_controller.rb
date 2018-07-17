@@ -20,9 +20,9 @@ class LocationsController < ApplicationController
     params[:location][:edible] << params[:location][:selected_edible] if !params[:location][:selected_edible].empty?
     if !params[:location][:address].empty? && !params[:location][:edible].empty?
       edible = Edible.find_or_create_by(name: params[:location][:edible])
+      loc = Location.find_by(loc_type: params[:location][:loc_type])
       @locations = Location.all
-      @location = Location.create(address: params[:location][:address], lng: params[:location][:lng], lat: params[:location][:lat], description: params[:location][:description], user_id: current_user.id)
-      @location.update(loc_type: params[:location][:loc_type])
+      @location = Location.create(address: params[:location][:address], lng: params[:location][:lng], lat: params[:location][:lat], description: params[:location][:description], loc_type: params[:location][:loc_type], user_id: current_user.id)
 
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
