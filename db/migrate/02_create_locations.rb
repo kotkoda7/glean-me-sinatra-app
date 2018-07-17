@@ -5,7 +5,6 @@ class CreateLocations < ActiveRecord::Migration
       t.float :lat
   	  t.float :lng
       t.integer :user_id
-      t.integer :edible_id
       t.string :loc_type
   	  t.text :description
 

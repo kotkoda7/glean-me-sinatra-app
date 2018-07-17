@@ -1,5 +1,6 @@
 require './config/environment'
 require 'rack-flash'
+require 'pry'
 
 class ApplicationController < Sinatra::Base
   use Rack::Flash
@@ -14,6 +15,7 @@ class ApplicationController < Sinatra::Base
   get "/" do
     if logged_in?
       @user = current_user
+      @location = Location.find_by(params[:id])
       erb :'/users/index'
     else
       erb :index

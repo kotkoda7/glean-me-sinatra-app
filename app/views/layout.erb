@@ -20,7 +20,7 @@
       <% if logged_in? %>
 
         <br>
-        <h3><p>Welcome, <%=current_user.username %></p></h3>
+        <h3><p>Welcome, <%=current_user.username %></p>
     
         <a href="/locations/new"> Create Location</a>
    
@@ -35,6 +35,8 @@
 
     </nav>
 
+  </h3>
+
   <div class="wrapper">
     <div class="flash">
       <% if flash.has?(:message) %>
@@ -42,10 +44,10 @@
       <% end %>
     </div>
 
-
       <%= yield %>
 
     <footer class="branding">
+
       <small>&copy; 2018 <strong>GleanMeSinatraApp</strong></small>
     </footer>
   </div>
@@ -56,7 +58,24 @@
     <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
   <![endif]-->
   <dev>
+<center>
+<h3>
+    <br>
+<% if @user == current_user && !@user.locations.empty?%>
 
+  <h3>
+      <a href="/locations/<%=@location.id%>/edit">Edit</a>
+      <a href="/locations/<%=@location.id%>/delete">Delete</a>
+  </h3>
+  <% end %>
+
+
+    <a href="/locations">All locations</a>
+
+    <a href="/edibles">  All food categories</a>
+
+</h3></center>
      
   </dev>
+
 </body>

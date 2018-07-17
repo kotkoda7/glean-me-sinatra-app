@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  require 'pry'
+  
 
   get '/locations' do
     authenticate_user
@@ -16,14 +16,13 @@ class LocationsController < ApplicationController
 
   post '/locations/new' do
     authenticate_user
-    params[:location][:edible] = params[:location][:selected_edible] if !params[:location][:selected_edible].empty?
 
+    params[:location][:edible] << params[:location][:selected_edible] if !params[:location][:selected_edible].empty?
     if !params[:location][:address].empty? && !params[:location][:edible].empty?
       edible = Edible.find_or_create_by(name: params[:location][:edible])
-      @location = Location.create(address: params[:location][:address], 
-        lat: params[:location][:lat], lng: params[:location][:lng], 
-        description: params[:location][:description], 
-        loc_type: params[:location][:loc_type], edible: edible, user_id: current_user.id)
+      @locations = Location.all
+      @location = Location.create(address: params[:location][:address], lng: params[:location][:lng], lat: params[:location][:lat], description: params[:location][:description], user_id: current_user.id)
+      @location.update(loc_type: params[:location][:loc_type])
 
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
@@ -34,15 +33,16 @@ class LocationsController < ApplicationController
   end
 
 
-  get '/locations/:id' do
+   get '/locations/:id' do
     authenticate_user
+    @user = current_user
     @location = Location.find(params[:id])
+    @locations = Location.all
     @edibles = Edible.all
+    @edible = Edible.find(params[:id])
     if @location
-
-            #binding.pry
+#binding.pry
       erb :'/locations/show'
-
     else
       flash[:message] = "This location does not exist"
       redirect '/locations'

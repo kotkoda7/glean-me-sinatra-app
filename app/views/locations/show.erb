@@ -17,14 +17,14 @@
 <br>
 
 <h3>Food available:</h3>
-<% @edibles.each do |edible| %>
-    <%= edible.name if edible.id==@location.edible_id%>
-<% end %>
 <br>
+
+<% @location.edibles.each do |e| %>
+    <li><a href="/edibles/<%=e.id%>"><%= e.name %></a></li>
+  <% end%>
 
 <h3>Location description:</h3>
     <%= @location.description %> 
-
 
 <br>
 <% if @location.user == current_user%>

@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 3) do
     t.float    "lat"
     t.float    "lng"
     t.integer  "user_id"
-    t.integer  "edible_id"
     t.string   "loc_type"
     t.text     "description"
     t.datetime "created_at",  null: false

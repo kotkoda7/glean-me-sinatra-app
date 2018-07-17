@@ -10,22 +10,15 @@
 <% @user.locations.each do |location| %>
 <li>
     <a href="/locations/<%=location.id%>">
-       Location #<%= location.id %></a>: <%= location.address %>, <%= location.lat %>, <%= location.lng %> <%=location.edible.name%>
+       Location #<%= location.id %></a>: <%= location.address %>, <%= location.lat %>, <%= location.lng %> <%=@user.edibles.name%>
 </li>
 <% end %>
 
 <% elsif @user.locations.empty? %>
 
-<h3>Your location library is currently empty.</h3>
+<h3>Your location library is currently empty. </h3>
+<br>
+Please add a location or check out the locations that have already been entered using the menu.
 
 <% end %>
 
-<br>
-<h3>
-    <a href="/">My Locations</a>
-<br>
-    <a href="/locations">All locations</a>
-<br>
-    <a href="/edibles">All food categories</a>
-
-</h3>

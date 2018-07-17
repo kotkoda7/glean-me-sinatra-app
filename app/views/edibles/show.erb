@@ -2,28 +2,13 @@
 
 
 
-
-<% if !@edible.locations.empty? %>
-
-  
-
-  
-<% else %>
-  <h2>There are no food to show by
-      <%=@edible.name%>... yet</h2>
-<% end %>
+<%= @edible.name%> is a .... 
 
 <br>
+<br>
 <h3>
-    <a href="/edibles/<%=@edible.id%>/add_location">Add a location</a>
-    to
-    <%=@edible.name%>.
-</h3>
+    Back to <a href="/">My Locations</a>
+<br>
+    See <a href="/locations">All locations</a>
 
-<h3>Back to
-    <a href="/">my library</a>
-</h3>
-
-<h3>Back to
-    <a href="/edibles">all edibles</a>
 </h3>
