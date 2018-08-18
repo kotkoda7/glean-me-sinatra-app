@@ -28,12 +28,12 @@
   </select>
 <br>
 
-<h3><label>Choose a food type for this location:</label>
+  <h3><label>Choose a food type for this location:</label>
   
   <select name="location[selected_edible]">
         <option value="">-</option>
-        <% @edibles.each do |e| %>
-          <option value="<%=e.name%>"><%=e.name%></option>
+        <% @locations.each do |location| %>
+          <option value="<%=location.edible%>"><%=location.edible%></option>
         <% end %>
     </select>
 

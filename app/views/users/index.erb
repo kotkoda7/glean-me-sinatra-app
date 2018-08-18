@@ -10,7 +10,7 @@
 <% @user.locations.each do |location| %>
 <li>
     <a href="/locations/<%=location.id%>">
-       Location #<%= location.id %></a>: <%= location.address %>, <%= location.lat %>, <%= location.lng %> <%=@user.edibles.name%>
+       Location #<%= location.id %></a>: <%= location.address %>, <%= location.lat %>, <%= location.lng %>
 </li>
 <% end %>
 

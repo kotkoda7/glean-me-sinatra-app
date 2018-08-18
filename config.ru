@@ -7,6 +7,5 @@ end
 
 use Rack::MethodOverride
 use LocationsController
-use EdiblesController
 use UsersController
 run ApplicationController

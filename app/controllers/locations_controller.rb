@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
-  
 
+  
   get '/locations' do
     authenticate_user
     @locations = Location.all
@@ -9,7 +9,6 @@ class LocationsController < ApplicationController
 
   get '/locations/new' do
     authenticate_user
-    @edibles = Edible.all
     @locations = Location.all
     erb :'/locations/new'
   end
@@ -17,43 +16,23 @@ class LocationsController < ApplicationController
   post '/locations/new' do
     authenticate_user
 
-    params[:location][:edible] << params[:location][:selected_edible] if !params[:location][:selected_edible].empty?
-    if !params[:location][:address].empty? && !params[:location][:edible].empty?
-      edible = Edible.find_or_create_by(name: params[:location][:edible])
-      loc = Location.find_by(loc_type: params[:location][:loc_type])
-      @locations = Location.all
-      @location = Location.create(address: params[:location][:address], lng: params[:location][:lng], lat: params[:location][:lat], description: params[:location][:description], loc_type: params[:location][:loc_type], user_id: current_user.id)
+    if Location.valid_params?(params)
+      params[:location][:edible] << params[:location][:selected_edible]
+      @location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible])
 
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
     else
-      flash[:message] = "All fields must be filled in. Please complete the form."
+      flash[:message] = "Both fields must be filled in. Please complete the form."
       redirect '/locations/new'
     end
-  end
-
-
-   get '/locations/:id' do
-    authenticate_user
-    @user = current_user
-    @location = Location.find(params[:id])
-    @locations = Location.all
-    @edibles = Edible.all
-    @edible = Edible.find(params[:id])
-    if @location
-#binding.pry
-      erb :'/locations/show'
-    else
-      flash[:message] = "This location does not exist"
-      redirect '/locations'
-    end
+    
   end
 
   get '/locations/:id/edit' do
     authenticate_user
-    @location = Location.find_by_id(params[:id]) 
-    @locations = Location.all
-    @edibles = Edible.all
+    @location = Location.find_by(params[:id])
+     @locations = Location.all
     if @location && @location.user == current_user
       erb :'/locations/edit'
     elsif @location && !@location.user == current_user
@@ -61,69 +40,50 @@ class LocationsController < ApplicationController
       redirect to "/locations/#{@location.id}"
     else
       flash[:message] = "This location doesn't exist."
-      redirect to "/locations"
+      #redirect to "/locations"
+      erb :'/locations/edit'
     end
   end
 
-
-
-  patch '/locations/:id/edit' do
+  patch "/locations/:id/edit" do
     authenticate_user
-    @location = Location.find_by_id(params[:id])
-    if !params[:location][:address].empty?
-      if edible ||= Edible.find_by(name: params[:location][:edible])
-        @location.update(address: params[:location][:address], 
-        lat: params[:location][:lat], lng: params[:location][:lng], 
-        description: params[:location][:description], 
-        loc_type: params[:location][:loc_type], edible: edible)
-      else edible = Edible.create(name: params[:location][:edible])
-        @location.update(address: params[:location][:address], 
-        lat: params[:location][:lat], lng: params[:location][:lng], 
-        description: params[:location][:description], 
-        loc_type: params[:location][:loc_type], edible: edible)
-      end
+    @location = Location.find(params[:id])
+
+    if Location.valid_params?(params)
+      @location.update(params.select{|k|k=="address" || k=="lat"})
       flash[:message] = "The location is successfully updated."
       redirect to "/locations/#{@location.id}"
     else
-      flash[:message] = "All fields must be filled in. Please complete the form."
+      flash[:message] = "Both fields must be filled in. Please complete the form."
       redirect to "/locations/#{@location.id}/edit"
     end
+    
   end
 
- 
-
-   get '/locations/:id/add_edible' do
+  get '/locations/:id' do
     authenticate_user
     @location = Location.find_by_id(params[:id])
-    erb :'/locations/add_edible'
-  end
-
-  post '/locations/:id/add_edible' do
-    @location = Location.find_by_id(params[:id])
-    if !params[:location_address].empty?
-      Edible.create(address: params[:location_address], location: @location, user: current_user)
-
-      flash[:message] = "Food type is successfully added."
-      redirect "/locations/#{@location.id}"
+    if @location
+      erb :'/locations/show'
     else
-      flash[:message] = "Enter the food type."
-      redirect "/locations/#{@location.id}/add_edible"
+      flash[:message] = "This location does not exist"
+      redirect '/locations'
     end
   end
+
+  
 
   get '/locations/:id/delete' do
     authenticate_user
-    @location = Location.find(params[:id])
-    @edible = @location.edible_id
-    if @location.user == current_user
+    @location = Location.find_by_id(params[:id])
+    if @user == current_user
       @location.destroy
 
       flash[:message] = "The location is successfully deleted."
-      redirect '/locations'
+      redirect "/locations"
     else
       flash[:message] = "You cannot delete another user's location."
       redirect to "/locations/#{@location.id}"
     end
   end
-
 end
