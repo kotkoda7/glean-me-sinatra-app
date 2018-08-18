@@ -29,9 +29,20 @@ class LocationsController < ApplicationController
     
   end
 
+get '/locations/:id' do
+    authenticate_user
+    @location = Location.find_by_id(params[:id])
+    if @location
+      erb :'/locations/show'
+    else
+      flash[:message] = "This location does not exist"
+      redirect '/locations'
+    end
+  end
+
   get '/locations/:id/edit' do
     authenticate_user
-    @location = Location.find_by(params[:id])
+    @location = Location.find_by_id(params[:id])
      @locations = Location.all
     if @location && @location.user == current_user
       erb :'/locations/edit'
@@ -45,31 +56,20 @@ class LocationsController < ApplicationController
     end
   end
 
-  patch "/locations/:id/edit" do
+  post "/locations/:id/edit" do
     authenticate_user
-    @location = Location.find(params[:id])
+    @location = Location.find_by_id(params[:id])
 
-    if Location.valid_params?(params)
-      @location.update(params.select{|k|k=="address" || k=="lat"})
-      flash[:message] = "The location is successfully updated."
-      redirect to "/locations/#{@location.id}"
-    else
-      flash[:message] = "Both fields must be filled in. Please complete the form."
-      redirect to "/locations/#{@location.id}/edit"
-    end
+    #if Location.valid_params?(params)
+      location = Location.update_all
+
+      #flash[:message] = "Both fields must be filled in. Please complete the form."
+      #redirect to "/locations/#{@location.id}/edit"
+    #end
     
   end
 
-  get '/locations/:id' do
-    authenticate_user
-    @location = Location.find_by_id(params[:id])
-    if @location
-      erb :'/locations/show'
-    else
-      flash[:message] = "This location does not exist"
-      redirect '/locations'
-    end
-  end
+  
 
   
 

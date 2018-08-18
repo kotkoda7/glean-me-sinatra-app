@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     if logged_in?
-      @user = current_user
+      @location.user = current_user
       @location = Location.find_by(params[:id])
       erb :'/users/index'
     else
