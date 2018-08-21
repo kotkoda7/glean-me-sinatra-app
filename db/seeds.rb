@@ -10,4 +10,3 @@ leo = User.create(id:2, username: "Leo", password: "efgh")
 
 seattle = Location.create(id: 1, user_id: 1, edible: "Apple Tree", loc_type: "public", lat: 47.6062, lng: -100.3321, address: "Seattle, WA")
 portland = Location.create(id: 2, user_id: 2, edible: "Bluberry Bush", loc_type: "private", lat: 45.5122, lng: -122.6587, address: "Portland, WA")
-portland = Location.create(id: 3, user_id: 2, edible: "Blackberry Bush", loc_type: "private", lat: 40.45, lng: -120, address: "Bellingham, WA")

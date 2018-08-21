@@ -15,11 +15,11 @@ class LocationsController < ApplicationController
 
   post '/locations/new' do
     authenticate_user
-    @locations = Location.all
-    
+
     if Location.valid_params?(params)
       params[:location][:edible] << params[:location][:selected_edible]
-      @location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
+      #@location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
+      Location.find_or_create_by(params)
 
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
@@ -57,12 +57,12 @@ get '/locations/:id' do
     end
   end
 
-  post "/locations/:id/edit" do
+  patch "/locations/:id/edit" do
     authenticate_user
-    @location = Location.find_by_id(params[:id])
-
+    @location = Location.find_by(params[:id])
+    @locations = Location.all
     #if Location.valid_params?(params)
-     @location.update(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
+    @location.update(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible])
 
       #flash[:message] = "Both fields must be filled in. Please complete the form."
       redirect to "/locations/#{@location.id}"
@@ -70,7 +70,6 @@ get '/locations/:id' do
     
   end
 
-  
 
   get '/locations/:id/delete' do
     authenticate_user
