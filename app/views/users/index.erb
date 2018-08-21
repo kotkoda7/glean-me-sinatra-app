@@ -1,4 +1,6 @@
-
+<h2>Hello,
+    <%= @user.username %>
+</h2>
 
 <% if !@user.locations.empty? %>
   
@@ -21,4 +23,11 @@
 Please add a location or check out the locations that have already been entered using the menu.
 
 <% end %>
+
+<br></br>
+
+<h3>See
+    <a href="/locations">all locations</a>
+</h3>
+
 

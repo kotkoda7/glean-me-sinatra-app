@@ -1,30 +1,31 @@
 require './config/environment'
 require 'rack-flash'
-require 'pry'
-require 'sinatra'
 
 class ApplicationController < Sinatra::Base
   use Rack::Flash
+  
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, 'gleanme'
+    set :session_secret, 'foodforall'
+    
   end
 
-  get "/" do
+
+get '/' do
     if logged_in?
-      @location.user = current_user
-      @location = Location.find_by(params[:id])
+      @user = current_user
       erb :'/users/index'
     else
       erb :index
     end
   end
-  
 
-  helpers do
+
+  
+helpers do
     def logged_in?
       !!session[:user_id]
     end

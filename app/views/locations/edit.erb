@@ -19,10 +19,16 @@
     
   <br>
 
+
+    <label>Change description to:</label>
+      <input type="text" name="location[description]" size="80" value="<%=@location.description%>">
+ 
+    <br>
+
   <label>Location type:</label>
 <select name="location[loc_type]">
         <% @locations.each do |location| %>
-          <option value=<%=@location.id%> <%= "selected" if location.id==@location.loc_type%> ><%=location.loc_type%> 
+          <option value=<%=@location.loc_type%> <%= "selected" if location.loc_type==@location.loc_type%> ><%=location.loc_type%> 
         </option>     
         <% end %>
     </select>
@@ -34,7 +40,8 @@ Change food available at this location:
   <ul>
      <li><select name="location[edible]"></li>
         <% @locations.each do |location| %>
-          <option value=<%=@location.edible%> <%= "selected" if location.edible==@location.edible%> ><%=location.edible%> 
+          <option value=<%=@location.edible%> <%= "selected" if location.edible==@location.edible%> >
+            <%=location.edible%> 
         </option>     
         <% end %>
     </select>

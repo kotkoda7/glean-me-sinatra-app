@@ -15,10 +15,11 @@ class LocationsController < ApplicationController
 
   post '/locations/new' do
     authenticate_user
-
+    @locations = Location.all
+    
     if Location.valid_params?(params)
       params[:location][:edible] << params[:location][:selected_edible]
-      @location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible])
+      @location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
 
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
@@ -46,13 +47,13 @@ get '/locations/:id' do
      @locations = Location.all
     if @location && @location.user == current_user
       erb :'/locations/edit'
-    elsif @location && !@location.user == current_user
+    else @location && !@location.user == current_user
       flash[:message] = "You cannot change another user's location."
       redirect to "/locations/#{@location.id}"
-    else
-      flash[:message] = "This location doesn't exist."
+    #else
+      #flash[:message] = "This location doesn't exist."
       #redirect to "/locations"
-      erb :'/locations/edit'
+      #erb :'/locations/edit'
     end
   end
 
@@ -61,22 +62,20 @@ get '/locations/:id' do
     @location = Location.find_by_id(params[:id])
 
     #if Location.valid_params?(params)
-      location = Location.update_all
+     @location.update(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
 
       #flash[:message] = "Both fields must be filled in. Please complete the form."
-      #redirect to "/locations/#{@location.id}/edit"
+      redirect to "/locations/#{@location.id}"
     #end
     
   end
 
   
 
-  
-
   get '/locations/:id/delete' do
     authenticate_user
     @location = Location.find_by_id(params[:id])
-    if @user == current_user
+    if @location.user == current_user
       @location.destroy
 
       flash[:message] = "The location is successfully deleted."
