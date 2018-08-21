@@ -4,12 +4,14 @@ class LocationsController < ApplicationController
   get '/locations' do
     authenticate_user
     @locations = Location.all
+    @loc_uniq = (Location.all).uniq
     erb :'/locations/index'
   end
 
   get '/locations/new' do
     authenticate_user
     @locations = Location.all
+    @loc_uniq = (Location.all).uniq!
     erb :'/locations/new'
   end
 
@@ -18,8 +20,14 @@ class LocationsController < ApplicationController
 
     if Location.valid_params?(params)
       params[:location][:edible] << params[:location][:selected_edible]
-      #@location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
-      Location.find_or_create_by(params)
+
+      #Location.find_or_create_by(params)
+      #location = Location.find_or_create_by(id: params[:location][:id])
+      
+      @location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
+       @loc_uniq = (Location.all).uniq!
+       #@locations = Location.all
+     
 
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
@@ -45,6 +53,7 @@ get '/locations/:id' do
     authenticate_user
     @location = Location.find_by_id(params[:id])
      @locations = Location.all
+     @loc_uniq = (Location.all).uniq!
     if @location && @location.user == current_user
       erb :'/locations/edit'
     else @location && !@location.user == current_user
@@ -61,12 +70,14 @@ get '/locations/:id' do
     authenticate_user
     @location = Location.find_by(params[:id])
     @locations = Location.all
-    #if Location.valid_params?(params)
-    @location.update(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible])
+    #@loc_uniq = (Location.all).uniq!
+    
+    if Location.valid_params?(params)
+    @location.update(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
 
       #flash[:message] = "Both fields must be filled in. Please complete the form."
       redirect to "/locations/#{@location.id}"
-    #end
+    end
     
   end
 

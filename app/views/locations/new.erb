@@ -15,6 +15,7 @@
 
 <label> Description</label>
 <input id="location_desc" name="location[description]" size="80" type="text" value="">
+<br>
 
 <br>
   <label>Choose a location type:</label>
@@ -29,16 +30,14 @@
   </select>
 <br>
 
-
 <h3><label>Choose a food type for this location:</label>
    <%@locations.each do |l|%>
-  <input type="checkbox" name="location[selected_edible]" id="<%= l.edible%>"  <value="<%=l.edible%>">
+  <input type="checkbox" name="location[selected_edible]" id="<%= l.edible%>"  <value="<%=l.id%>">
       
        <%=l.edible%></input>
         <% end %>
-    
-
   </h3>
+
 
 
 <br>
