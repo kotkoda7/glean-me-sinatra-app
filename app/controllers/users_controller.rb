@@ -41,16 +41,18 @@ get '/login' do
     end
   end
 
-   post '/login' do
+ post '/login' do
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect "/locations"
     else
-      
+      flash[:message] = "You must sign up first!"
+
       redirect to '/signup'
     end
   end
+
 
 get '/logout' do
     if session[:user_id] != nil
@@ -62,3 +64,6 @@ get '/logout' do
   end
 
 end
+
+
+

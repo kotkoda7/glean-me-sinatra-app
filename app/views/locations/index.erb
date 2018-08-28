@@ -6,8 +6,8 @@
     <br>
         #<a href="/locations/<%= location.id%>"><%= location.id%>  </a>
     <%= location.address%>,
-     <br>Lat.: <%= location.lat%>
-     <br>Long.: <%= location.lng%>
+     <br>Lat.: <%= location.lat.to_f%>
+     <br>Long.: <%= location.lng.to_f%>
     <br>
     <% end %>
 <br>

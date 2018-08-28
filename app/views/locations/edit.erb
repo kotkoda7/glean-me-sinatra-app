@@ -5,50 +5,42 @@
 <h3>
 <form action="/locations/<%= @location.id %>/edit" method="POST">
   <input type="hidden" name="_method" value="PATCH">
-
-
   
     <label>Change address to: </label>
     <input type="text" name="location[address]" value="<%=@location.address%>">
   <br>
     <label>Change latitude to: </label>
-    <input type="number" name="location[lat]" value="<%=@location.lat%>">
+    <input type="text" name="location[lat]" step=0.01 value="<%=@location.lat%>">
 
   <br>
     <label>Change longitude to: </label>
-    <input type="number" name="location[lng]" value="<%=@location.lng%>">
+    <input type="text" name="location[lng]" step=0.01 value="<%=@location.lng%>">
     
   <br>
-
     <label>Change description to:</label>
       <input type="text" name="location[description]" size="80" value="<%=@location.description%>">
  
     <br>
-
-  <label>Location type:</label>
+  <label>Change location type:</label>
 <select name="location[loc_type]">
-        <% @user.locations.each do |location| %>
-          <option value=<%=@location.loc_type%> <%= "selected" if location.loc_type==@location.loc_type%> ><%=location.loc_type%> 
-        </option>     
+      <option value="">
+        -
+      </option>
+      <% @locations.each do |location| %>
+        <option value="<%=location.loc_type%>"><%=location.loc_type%>
+        </option>
+      <% end %>
+  </select>
+
+
+  <h3><label>Change food available at this location:</label>
+        <% @edibles.each do |e| %>
+          <input type="checkbox" name="location[edible]" value="<%=e.edible%>"
+          id="<%=e.edible%>"><%=e.edible%></input>
         <% end %>
-    </select>
-<br>
+</h3>
+ <br>
 
-
-Change food available at this location:
-
-  <ul>
-     <li><select name="location[edible]"></li>
-        <% @user.locations.each do |location| %>
-          <option value=<%=@location.edible%> <%= "selected" if location.edible==@location.edible%> >
-            <%=location.edible%> 
-        </option>     
-        <% end %>
-    </select>
-  </ul>
-
-
-  <br>
 
     
     <input type="submit" value="Submit">

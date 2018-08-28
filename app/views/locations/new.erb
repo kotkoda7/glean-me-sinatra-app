@@ -7,10 +7,10 @@
   <input type="text" name="location[address]" size="40" > </br>
 
   <label> Latitude</label>
-  <input id="location_lat" name="location[lat]" size="10" type="text" value="">
+  <input id="location_lat" name="location[lat]" size="8" type="number" step=0.01 value="location[lat]">
 
   <label> Longitude</label>
-  <input id="location_lng" name="location[lng]" size="10" type="text" value="">
+  <input id="location_lng" name="location[lng]" size="8" type="number" step=0.01 value="location[lat]">
   <br>
 
 <label> Description</label>
@@ -31,20 +31,17 @@
 <br>
 
 <h3><label>Choose a food type for this location:</label>
-   <%@locations.each do |l|%>
-  <input type="checkbox" name="location[selected_edible]" id="<%= l.edible%>"  <value="<%=l.id%>">
-      
-       <%=l.edible%></input>
+        <% @edibles.each do |e| %>
+          <input type="checkbox" name="location[selected_edible]" value="<%=e.edible%>"
+          id="<%=e.edible%>"><%=e.edible%></input>
         <% end %>
-  </h3>
-
-
-
-<br>
+</h3>
+ <br>
+ 
 If you need to add a new food category, please add it here first:
 <br>
   <label> Name of new food category: </label>
-  <input type="text" name="location[edible]"> </br>
+  <input type="text" name="location[edible]"> <br>
   <input type="submit" value="Add location">
 </form>
 
