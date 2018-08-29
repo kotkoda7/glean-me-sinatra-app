@@ -3,13 +3,13 @@
 <h3>
   <form action="/locations/new" method="POST">
 
-  <label> Location address</label>
+  <label> Location address*</label>
   <input type="text" name="location[address]" size="40" > </br>
 
-  <label> Latitude</label>
+  <label> Latitude*</label>
   <input id="location_lat" name="location[lat]" size="8" type="number" step=0.01 value="location[lat]">
 
-  <label> Longitude</label>
+  <label> Longitude*</label>
   <input id="location_lng" name="location[lng]" size="8" type="number" step=0.01 value="location[lat]">
   <br>
 
@@ -30,7 +30,7 @@
   </select>
 <br>
 
-<h3><label>Choose a food type for this location:</label>
+<h3><label>Choose a food type for this location:*</label>
 <select name="location[selected_edible]">
       <option value="">
         -

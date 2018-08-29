@@ -6,14 +6,14 @@
 <form action="/locations/<%= @location.id %>/edit" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   
-    <label>Change address to: </label>
+    <label>Change address to:* </label>
     <input type="text" name="location[address]" value="<%=@location.address%>">
   <br>
-    <label>Change latitude to: </label>
+    <label>Change latitude to:* </label>
     <input type="text" name="location[lat]" step=0.01 value="<%=@location.lat%>">
 
   <br>
-    <label>Change longitude to: </label>
+    <label>Change longitude to:* </label>
     <input type="text" name="location[lng]" step=0.01 value="<%=@location.lng%>">
     
   <br>
@@ -32,7 +32,7 @@
 
 
 
-  <h3><label>Change food available at this location:</label>
+  <h3><label>Change food available at this location:*</label>
         <select name="location[edible]">
 
       <% @edibles.each do |e| %>
