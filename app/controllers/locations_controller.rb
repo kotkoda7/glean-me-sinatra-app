@@ -49,14 +49,11 @@ get '/locations/:id/edit' do
     @locations = Location.all.group(:loc_type)
     @edibles = Location.all.group(:edible)
 
-    if @location && @location.user == current_user
+     if @location.user == current_user
       erb :'/locations/edit'
-    elsif @location && !@location.user == current_user
+    else 
       flash[:message] = "You cannot change another user's location."
       redirect to "/locations/#{@location.id}"
-    else
-      flash[:message] = "This location doesn't exist."
-      redirect to "/locations"
     end
   end
 
