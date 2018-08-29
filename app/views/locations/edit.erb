@@ -23,24 +23,25 @@
     <br>
   <label>Change location type:</label>
 <select name="location[loc_type]">
-      <option value="">
-        -
-      </option>
+
       <% @locations.each do |location| %>
-        <option value="<%=location.loc_type%>"><%=location.loc_type%>
+        <option value="<%=location.loc_type%>"<%= "selected" if location.loc_type==@location.loc_type %> ><%=location.loc_type%>
         </option>
       <% end %>
   </select>
 
 
-  <h3><label>Change food available at this location:</label>
-        <% @edibles.each do |e| %>
-          <input type="checkbox" name="location[edible]" value="<%=e.edible%>"
-          id="<%=e.edible%>"><%=e.edible%></input>
-        <% end %>
-</h3>
- <br>
 
+  <h3><label>Change food available at this location:</label>
+        <select name="location[edible]">
+
+      <% @edibles.each do |e| %>
+        <option value="<%=e.edible%>"><%=e.edible%>
+        </option>
+      <% end %>
+  </select>
+<br>
+ <br>
 
     
     <input type="submit" value="Submit">

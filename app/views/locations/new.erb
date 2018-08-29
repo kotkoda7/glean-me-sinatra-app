@@ -31,12 +31,18 @@
 <br>
 
 <h3><label>Choose a food type for this location:</label>
-        <% @edibles.each do |e| %>
-          <input type="checkbox" name="location[selected_edible]" value="<%=e.edible%>"
-          id="<%=e.edible%>"><%=e.edible%></input>
-        <% end %>
-</h3>
- <br>
+<select name="location[selected_edible]">
+      <option value="">
+        -
+      </option>
+      <% @edibles.each do |e| %>
+        <option value="<%=e.edible%>"><%=e.edible%>
+        </option>
+      <% end %>
+  </select>
+<br>
+
+<br>
  
 If you need to add a new food category, please add it here first:
 <br>
