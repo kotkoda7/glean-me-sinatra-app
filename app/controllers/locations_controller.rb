@@ -8,8 +8,7 @@ class LocationsController < ApplicationController
 
   get '/locations/new' do
     authenticate_user
-    #@edibles = Edible.all
-    #@locations = Location.all
+    
     @locations = Location.all.group(:loc_type)
     @edibles = Location.all.group(:edible)
 
@@ -20,13 +19,13 @@ class LocationsController < ApplicationController
     authenticate_user
     params[:location][:edible] = params[:location][:selected_edible] if !params[:location][:selected_edible].empty?
 
-    if !params[:location][:address].empty? && !params[:location][:edible].empty?
-      #edible = Edible.find_by(params[:location][:edible])
+    if (!params[:location][:address].empty? || !params[:location][:lat].empty?) && (!params[:location][:edible].empty? || !params[:location][:selected_edible].empty?)
+     
       @location = Location.create(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible],user_id: current_user.id)
       flash[:message] = "The location is successfully added."
       redirect "/locations/#{@location.id}"
     else
-      flash[:message] = "Both fields must be filled in. Please complete the form."
+      flash[:message] = "Location and food type fields must be filled in. Please complete the form."
       redirect '/locations/new'
     end
   end
@@ -58,20 +57,19 @@ get '/locations/:id/edit' do
   end
 
 
-
   patch '/locations/:id/edit' do
     authenticate_user
     @location = Location.find_by_id(params[:id])
-    #if !params[:location][:edible].nil? && !params[:location][:address].nil?
-        #edible ||= Location.find_by(id: params[:location][:id])
+    if (!params[:location][:address].empty? || !params[:location][:lat].empty?) && !params[:location][:edible].empty?
+
         @location.update(address: params[:location][:address], lat: params[:location][:lat], lng: params[:location][:lng], description: params[:location][:description], loc_type: params[:location][:loc_type], edible: params[:location][:edible], user_id: current_user.id)
 
       flash[:message] = "The location is successfully updated."
       redirect to "/locations/#{@location.id}"
-    #else
-      #flash[:message] = "Both fields must be filled in. Please complete the form."
-      #redirect to "/locations/#{@location.id}/edit"
-    #end
+    else
+      flash[:message] = "Location and food type fields must be filled in. Please complete the form."
+      redirect to "/locations/#{@location.id}/edit"
+    end
   end
   
 
